@@ -1,4 +1,4 @@
-import { createWorker } from 'tesseract.js';
+import { createWorker, PSM } from 'tesseract.js';
 import { normalizeQuantity } from './calc';
 import { cropSegmentCells, imageSourceToCanvas } from './imageProcessing';
 import type { CaptureSegment, OcrResult, PercentRect } from '@/types';
@@ -38,7 +38,7 @@ export async function recognizeSegmentQuantities(
   try {
     await worker.setParameters({
       tessedit_char_whitelist: '0123456789',
-      tessedit_pageseg_mode: '8',
+      tessedit_pageseg_mode: PSM.SINGLE_WORD,
     });
 
     for (let i = 0; i < cells.length; i += 1) {
